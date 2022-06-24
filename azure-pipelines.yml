@@ -14,7 +14,7 @@ variables:
   dockerRegistryServiceConnection: 'b5c8a0d3-f6b3-4218-af26-d7e8af5a507e'
   imageRepository: 'myimage'
   containerRegistry: 'riskcontainers.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
+  dockerfilePath: '$(Build.SourcesDirectory)./Dockerfile .'
   tag: '$(Build.BuildId)'
   imagePullSecret: 'riskcontainers4462-auth'
 
