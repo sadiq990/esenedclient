@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: sadiqesenedclient 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sadiqesenedclient
+  template:
+    metadata:
+      labels:
+        app: sadiqesenedclient 
+    spec:
+      containers:
+        - name: sadiqesenedclient 
+          image: riskcontainers.azurecr.io/sadiqesenedclient
+          ports:
+          - containerPort: 80
