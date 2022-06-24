@@ -37,8 +37,7 @@ stages:
         containerRegistry: '$(dockerRegistryServiceConnection)'
         repository: '$(imageRepository)'
         command: 'buildAndPush'
-        Dockerfile: '$(Build.SourcesDirectory)/esenedclient/Dockerfile'
-        buildContext: 
+        Dockerfile: '**/Dockerfile'
         tags: '$(tag)'
 
     - upload: manifests
