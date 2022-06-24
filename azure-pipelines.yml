@@ -14,7 +14,7 @@ variables:
   dockerRegistryServiceConnection: '2604e8bb-32bd-4690-9c4c-be0ad4aa7d97'
   imageRepository: 'sadiqesenedclient'
   containerRegistry: 'riskcontainers.azurecr.io'
-  dockerfilePath: '**/Dockerfile'
+  dockerfilePath: '$(Build.SourcesDirectory)/esened/Dockerfile'
   tag: '$(Build.BuildId)'
   imagePullSecret: 'riskcontainers18231e6d-auth'
 
@@ -37,7 +37,8 @@ stages:
         containerRegistry: '$(dockerRegistryServiceConnection)'
         repository: '$(imageRepository)'
         command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
+        Dockerfile: '$(dockerfilePath)'
+        buildContext: 
         tags: '$(tag)'
 
     - upload: manifests
