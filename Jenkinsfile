@@ -1,25 +1,27 @@
-pipeline {
-    agent any 
-    // build section
-    stages {
-        stage("build image") {
-            steps {
+pipeline{
+    agent any
+    stages{
+        stage("build"){
+            steps{
                 script {
-                    echo "building the docker image"
-                    withCredentials([usernamePassword(credentialsId: 'docker_hub_password' , passwordVariable: 'PASS' , usernameVariable: 'USER' )]) {
-                        sh 'docker build -t sadiq990/nurlanapp .'
-                        sh " echo $PASS  docker login -u $USER --pasword-stdin"
-                        sh 'docker push sadiq990/frontendapp'
+                    echo "building the application "
+                    
+                }
+            }
+           
+        }
+        stage("deploy"){
+            steps{
+                script {
+                    echo "deploying the application ..."
+                    withCredentials([usernamePassword(credentialsId: 'docker_hub_password' , passwordVariable: 'PASS' usernameVariable: 'USER' )]){
+                       sh 'docker build -t sadiq990/nurlanapplication .'
+                       sh "echo $PASS | docker login -u $USER --passsword-stdin" 
+                       sh 'docker push'
                     }
                 }
             }
-        }
-        //deploy section 
-        stage("build") {
-            steps {
-                script {
-                    echo "deploying the application"
-                }
-            }
+           
         }
     }
+} 
